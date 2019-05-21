@@ -1,0 +1,31 @@
+const colourLoversAPI = 'http://www.colourlovers.com/api/colors';
+
+$(document).ready(() => {
+    $('#searchBtn').on('click', () => {
+        let searchText = $('#search').val();
+        let searchUrl = `${colourLoversAPI}?keywords=${searchText}&jsonCallback=?`;
+
+        $.getJSON(searchUrl, (results) => {
+            console.log('results: ', results);
+            const paletteTemplate = $('#paletteTemplate');
+            const output = $('#output');
+
+            results.forEach((palette)=> {
+                let paletteHtml = paletteTemplate.html().trim();
+                let $palette = $(paletteHtml);
+
+                //TODO: Update palette name, and author
+                let $image = $palette.find('.palette-image');
+                $image.attr('src', palette.imageUrl);
+
+                let $name = $palette.find('.palette-name');
+                $name.text(palette.title);
+
+                let $author = $palette.find('.palette-author');
+                $author.text(palette.userName);
+
+                output.append($palette);
+            });
+        });
+    });
+});
