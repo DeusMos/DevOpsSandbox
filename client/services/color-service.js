@@ -3,7 +3,7 @@ module.exports = {
     searchColors: searchColors
 };
 
-const colourLoversAPI = 'http://www.colourlovers.com/api/colors';
+const colourLoversAPI = '//www.colourlovers.com/api/colors';
 
 function getColors() {
 
