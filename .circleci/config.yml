@@ -1,9 +1,17 @@
-version: 2
-jobs:
-  build:
+
+version: 2.1
+
+executors:
+  node-executor:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:9.9
     working_directory: ~/webapp
+
+jobs:
+  install-dependencies:
+    executor: node-executor
+    working_directory: ~/webapp
+    
     steps:
       - checkout
       - restore_cache:
@@ -18,4 +26,4 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm test
+
