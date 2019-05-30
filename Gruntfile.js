@@ -1,4 +1,6 @@
-module.exports = function myTasks(grunt) {
+module.exports = myTasks;
+
+function myTasks(grunt) {
     grunt.initConfig({
         browserify: {
             main: {
@@ -6,6 +8,7 @@ module.exports = function myTasks(grunt) {
                 dest: 'dist/app.js'
             }
         },
+
         copy: {
             main: {
                 files: [
@@ -34,22 +37,15 @@ module.exports = function myTasks(grunt) {
         clean: {
             all: ['dist/*'],
             vendor: ['dist/vendor/*'],
-            main: ['dist/**/*.js', 'dist/**/*.html', '!dist/vendor/**']
+            main: ['dist/**/*.js', 'dist/**/*.html', '!dist/vendor/**.*']
         },
 
         watch: {
             main: {
-                files: [
-                    'client/**/*.js',
-                    'client/**/*.html'
-                ],
-                tasks: [
-                    'clean:main',
-                    'browserify:main',
-                    'copy:main'
-                ],
+                files: ['client/**/*.js', 'client/**/*.html'],
+                tasks: ['clean:main', 'browserify:main', 'copy:main'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             }
         }
@@ -58,7 +54,6 @@ module.exports = function myTasks(grunt) {
     grunt.registerTask('default', ['clean:all', 'build']);
     grunt.registerTask('dev', ['default', 'watch']);
     grunt.registerTask('build', ['browserify', 'copy']);
-
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');

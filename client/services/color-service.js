@@ -1,30 +1,30 @@
-module.exports = {
-    getColors: getColors,
-    searchColors: searchColors
-};
-
 const colourLoversAPI = '//www.colourlovers.com/api/colors';
 
-function getColors() {
-
-}
-
 function searchColors(query, filters = {}) {
-    let queryParams = [];
-    for(let key in filters){
-        queryParams.push(`${key}=${filters[key]}`);
-    }
-    queryParams.push(`keywords=${query}`);
-    queryParams.push('jsonCallback=?');
+  const queryParams = [];
 
-    let searchUrl = `${colourLoversAPI}?${queryParams.join(`&`)}`;
+  /* eslint-disable-next-line */
+  for (const key in Object.keys(filters)) {
+    queryParams.push(`${key}=${filters[key]}`);
+  }
+  queryParams.push(`keywords=${query}`);
+  queryParams.push('jsonCallback=?');
 
+  const searchUrl = `${colourLoversAPI}?${queryParams.join('&')}`;
 
-    return new Promise((resolve, reject) => {
-        $.getJSON(searchUrl, resolve)
-            .fail((jqxhr, textStatus, error) => {
-                reject(error);
-            });
-    })
-
+  return new Promise((resolve, reject) => {
+    $.getJSON(searchUrl, resolve)
+      .fail((jqxhr, textStatus, error) => {
+        reject(error);
+      });
+  });
 }
+
+function getNewColors() {
+  // TODO: Write this
+}
+
+module.exports = {
+  searchColors,
+  getNewColors
+};
