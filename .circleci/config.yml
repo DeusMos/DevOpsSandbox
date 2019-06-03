@@ -35,11 +35,11 @@ jobs:
     test:
       executor: node-excutor
       working_directory: ~/webapp
-        steps:
-          - checkout
-            - attach_workspace:
+      steps:
+        - checkout
+        - attach_workspace:
             at: ~/webapp
-              - test
+        - test
 
 
 
