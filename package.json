@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "npx grunt",
-    "test": "npx mocha --recursive tests/"
+    "test": "npx mocha --recursive tests/",
+    "lint": "npx eslint \"client/**.*.js\""
   },
   "author": "",
   "license": "ISC",

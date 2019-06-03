@@ -1,4 +1,3 @@
-
 version: 2.1
 
 executors:
@@ -11,7 +10,7 @@ jobs:
   install-dependencies:
     executor: node-executor
     working_directory: ~/webapp
-    
+
     steps:
       - checkout
       - restore_cache:
@@ -25,5 +24,42 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+    lint:
+      executor: node-executor
+      working_directory: ~/webapp
+      steps:
+        - checkout
+        - attach_workspace:
+            at: ~/webapp
+        - run: npm run lint
+    test:
+      executor: node-excutor
+      working_directory: ~/webapp
+        steps:
+          - checkout
+            - attach_workspace:
+            at: ~/webapp
+              - test
 
 
+
+workflows:
+  version: 2
+  github_pipeline:
+    jobs:
+      - install-dependencies
+      - lint
+      - test:
+          requires:
+            - install-dependencies
+      - build-client-github
+        requires:
+          - install-dependencies
+      - deploy-github
+        requires:
+          - build-client-github
+          - lint
+          - test
+        filters:
+          branches:
+            only: master
