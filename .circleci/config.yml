@@ -52,7 +52,7 @@ workflows:
       - test:
           requires:
             - install-dependencies
-      - build-client-github
+      - build-client-github:
         requires:
           - install-dependencies
       - deploy-github
