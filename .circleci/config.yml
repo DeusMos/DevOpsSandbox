@@ -48,16 +48,10 @@ workflows:
   github_pipeline:
     jobs:
       - install-dependencies
-      - lint
+      - lint:
+          requires:
+            - install-dependencies
       - test:
           requires:
             - install-dependencies
-      - build-client-github:
-      - deploy-github
-        requires:
-          - build-client-github
-          - lint
-          - test
-        filters:
-          branches:
-            only: master
+
