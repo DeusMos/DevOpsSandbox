@@ -53,8 +53,6 @@ workflows:
           requires:
             - install-dependencies
       - build-client-github:
-        requires:
-          - install-dependencies
       - deploy-github
         requires:
           - build-client-github
