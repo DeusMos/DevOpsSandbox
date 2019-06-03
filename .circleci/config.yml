@@ -10,7 +10,6 @@ jobs:
   install-dependencies:
     executor: node-executor
     working_directory: ~/webapp
-
     steps:
       - checkout
       - restore_cache:
@@ -20,27 +19,33 @@ jobs:
 
       - run: npm install
 
+      - persist_to_workspace:
+          root: ~/webapp
+          paths:
+            - node_modules
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-    lint:
-      executor: node-executor
-      working_directory: ~/webapp
-      steps:
-        - checkout
-        - attach_workspace:
-            at: ~/webapp
-        - run: npm run lint
-    test:
-      executor: node-excutor
-      working_directory: ~/webapp
-      steps:
-        - checkout
-        - attach_workspace:
-            at: ~/webapp
-        - test
 
+  lint:
+    executor: node-executor
+    working_directory: ~/webapp
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/webapp
+      - run: npm run lint
+
+  test:
+    executor: node-executor
+    working_directory: ~/webapp
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/webapp
+      - run: npm test
 
 
 workflows:
@@ -54,4 +59,3 @@ workflows:
       - test:
           requires:
             - install-dependencies
-
