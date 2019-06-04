@@ -26,5 +26,5 @@ function getNewColors() {
 
 module.exports = {
   searchColors,
-  getNewColors
+  getNewColors,
 };
