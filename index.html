@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GruntJS Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="input-group mb-3">
+            <input id="searchText" type="text" class="form-control" placeholder="Search colors" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button id="searchBtn" class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            </div>
+        </div>
+
+        <div id="output" class="row">
+        </div>
+    </div>
+
+    <template id="paletteTemplate">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="card">
+                <img src="//via.placeholder.com/150" class="card-img-top palette-image">
+                <div class="card-body">
+                    <h5 class="card-title palette-name">Palette Name</h5>
+                    <p class="card-text palette-author">Palette Author</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="vendor/jquery.js"></script>
+    <script src="app.js"></script>
+    <script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>
